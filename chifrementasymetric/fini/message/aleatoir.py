@@ -2,12 +2,15 @@ import time
 
 nombre_de_chiffres = 100  # <<< choisis ici
 
-def random_seed():
+def better_random_seed():
     t = time.time()
-    return int((t - int(t)) * 1000000)
+    t2 = time.perf_counter()
+    t3 = time.process_time()
+    mix = int((t * 1000000) ^ (t2 * 1000000) ^ (t3 * 1000000))  # XOR plusieurs horloges
+    return mix
 
 def random_impair(min_val, max_val):
-    r = random_seed()
+    r = better_random_seed()
     n = min_val + (r % (max_val - min_val + 1))
     if n % 2 == 0:
         n += 1
@@ -33,7 +36,6 @@ def miller_rabin(n, k=5):
     if n % 2 == 0:
         return False
     
-    # Décomposer n-1 en 2^r * d
     r = 0
     d = n - 1
     while d % 2 == 0:
@@ -41,7 +43,7 @@ def miller_rabin(n, k=5):
         r += 1
     
     for _ in range(k):
-        a = 2 + (random_seed() % (n - 3))
+        a = 2 + (better_random_seed() % (n - 3))
         x = puissance_modulaire(a, d, n)
         if x == 1 or x == n-1:
             continue
