@@ -56,5 +56,8 @@ def generer_nombre_premier_chiffres(chiffres):
             return candidat
 
 nombre_de_chiffres = 100
-nombre_premier = generer_nombre_premier_chiffres(nombre_de_chiffres)
-print(f"Nombre premier avec {nombre_de_chiffres} chiffres : {nombre_premier}")
+p = generer_nombre_premier_chiffres(nombre_de_chiffres)
+q = generer_nombre_premier_chiffres(nombre_de_chiffres)
+
+print(f"Nombre premier p avec {nombre_de_chiffres} chiffres : {p}")
+print(f"Nombre premier q avec {nombre_de_chiffres} chiffres : {q}")
