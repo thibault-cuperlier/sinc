@@ -1,12 +1,13 @@
 import time
 
 def better_random_seed():
-    """Génère une graine aléatoire basée sur plusieurs horloges système."""
+    """Génère une graine aléatoire plus diversifiée."""
     t = int(time.time() * 1000000)  # Convertir en entier
     t2 = int(time.perf_counter() * 1000000)  # Convertir en entier
     t3 = int(time.process_time() * 1000000)  # Convertir en entier
-    mix = t ^ t2 ^ t3  # XOR entre les entiers
-    return mix
+    t4 = int((time.time_ns() // 1000) % 1000000)  # Ajouter une autre source
+    mix = (t ^ t2 ^ t3 ^ t4) * 6364136223846793005 + 1  # Mélange avec une constante
+    return abs(mix)  # Retourner une valeur positive
 
 def random_impair(min_val, max_val):
     """Génère un nombre impair aléatoire dans une plage donnée."""
