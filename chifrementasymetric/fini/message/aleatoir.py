@@ -1,14 +1,16 @@
 import time
 
 def better_random_seed():
-    """Génère une graine aléatoire en concaténant des segments de 3 chiffres."""
-    t = int(time.time() * 1000) % 1000  # 3 derniers chiffres de l'heure actuelle en millisecondes
-    t2 = int(time.perf_counter() * 1000) % 1000  # 3 derniers chiffres du compteur haute précision
-    t3 = int(time.process_time() * 1000) % 1000  # 3 derniers chiffres du temps CPU
-    t4 = int((time.time_ns() // 1000) % 1000)  # 3 derniers chiffres du temps en nanosecondes
-    t5 = (t ^ t2 ^ t3 ^ t4) % 1000  # Mélange des 3 chiffres précédents
-    # Concaténation des segments pour former une graine
-    seed = int(f"{t:03}{t2:03}{t3:03}{t4:03}{t5:03}")
+    """Génère une graine aléatoire en concaténant plusieurs segments de 3 chiffres."""
+    segments = []
+    for _ in range(10):  # Générer 10 segments de 3 chiffres
+        t = int(time.time() * 1000) % 1000  # 3 derniers chiffres de l'heure actuelle en millisecondes
+        t2 = int(time.perf_counter() * 1000) % 1000  # 3 derniers chiffres du compteur haute précision
+        t3 = int(time.process_time() * 1000) % 1000  # 3 derniers chiffres du temps CPU
+        segment = (t ^ t2 ^ t3) % 1000  # Mélange des 3 chiffres
+        segments.append(f"{segment:03}")  # Ajouter le segment formaté à 3 chiffres
+        time.sleep(0.001)  # Pause pour éviter des valeurs identiques sur des exécutions rapprochées
+    seed = int("".join(segments))  # Concaténer tous les segments pour former la graine
     return seed
 
 def random_impair(min_val, max_val):
