@@ -2,11 +2,15 @@ import time
 
 def better_random_seed():
     """Génère une graine aléatoire plus diversifiée."""
-    t = int(time.time() * 1000000)  # Convertir en entier
-    t2 = int(time.perf_counter() * 1000000)  # Convertir en entier
-    t3 = int(time.process_time() * 1000000)  # Convertir en entier
-    t4 = int((time.time_ns() // 1000) % 1000000)  # Ajouter une autre source
-    mix = (t ^ t2 ^ t3 ^ t4) * 6364136223846793005 + 1  # Mélange avec une constante
+    t = int(time.time() * 1000000)  # Temps actuel en microsecondes
+    t2 = int(time.perf_counter() * 1000000)  # Temps haute précision
+    t3 = int(time.process_time() * 1000000)  # Temps CPU
+    t4 = int((time.time_ns() // 1000) % 1000000)  # Temps en nanosecondes
+    t5 = int((time.time_ns() ^ t) % 1000000)  # Mélange supplémentaire
+    mix = (t ^ t2 ^ t3 ^ t4 ^ t5) * 6364136223846793005 + 1  # Mélange avec une constante
+    mix ^= (mix >> 21)  # Décalage et XOR pour plus de diversité
+    mix ^= (mix << 35) & 0xFFFFFFFFFFFFFFFF  # Décalage et masque
+    mix ^= (mix >> 4)
     return abs(mix)  # Retourner une valeur positive
 
 def random_impair(min_val, max_val):
