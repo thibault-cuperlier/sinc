@@ -1,7 +1,6 @@
 import random
 
 def random_impair(min_val, max_val):
-    """Génère un nombre impair aléatoire dans une plage donnée."""
     n = random.randint(min_val, max_val)
     if n % 2 == 0:
         n += 1
@@ -10,7 +9,6 @@ def random_impair(min_val, max_val):
     return n
 
 def puissance_modulaire(a, d, n):
-    """Calcule (a^d) % n de manière efficace."""
     res = 1
     a = a % n
     while d > 0:
@@ -21,7 +19,6 @@ def puissance_modulaire(a, d, n):
     return res
 
 def miller_rabin(n, k=5):
-    """Teste si un nombre est probablement premier en utilisant le test de Miller-Rabin."""
     if n <= 1:
         return False
     if n == 2 or n == 3:
@@ -49,7 +46,6 @@ def miller_rabin(n, k=5):
     return True
 
 def generer_nombre_premier_chiffres(chiffres):
-    """Génère un nombre premier avec un nombre donné de chiffres."""
     if chiffres <= 0:
         return None
     debut = 10**(chiffres - 1)
@@ -59,7 +55,6 @@ def generer_nombre_premier_chiffres(chiffres):
         if miller_rabin(candidat):
             return candidat
 
-# Exemple d'utilisation
-nombre_de_chiffres = 100  # Remplacez par le nombre de chiffres souhaité
+nombre_de_chiffres = 100
 nombre_premier = generer_nombre_premier_chiffres(nombre_de_chiffres)
 print(f"Nombre premier avec {nombre_de_chiffres} chiffres : {nombre_premier}")
