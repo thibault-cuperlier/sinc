@@ -1,13 +1,8 @@
-# Guide d'utilisation du chiffrement RSA
+Pour utiliser ce chiffrement RSA fait maison, suivez ces étapes simples :
 
-Ce guide explique comment utiliser les scripts pour générer des clés RSA, chiffrer un message et le déchiffrer.
-
----
-
-## Étape 1 : Générer deux grands nombres premiers
-
-Exécutez le script `aleatoir.py` pour générer deux grands nombres premiers `p` et `q` :
-
-```bash
-python [aleatoir.py](http://_vscodecontentref_/0)
-```
+1. Générez deux grands nombres premiers p et q en exécutant le script `aleatoir.py` :
+python aleatoir.py
+2. Ensuite, démarrez le script `chifrement.py` avec :
+python chifrement.py
+3. Entrez le nombre p généré par le premier script, appuyez sur Entrée, et faites la même chose pour q.
+4. Enfin, démarrez le cryptage du message.
