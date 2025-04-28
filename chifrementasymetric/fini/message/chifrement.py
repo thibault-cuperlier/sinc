@@ -1,16 +1,13 @@
 from math import gcd
 
-# Demande des nombres premiers
 p = int(input("Entrez un nombre premier p : "))
 q = int(input("Entrez un nombre premier q : "))
 
-# Calcul de n et φ(n)
 n = p * q
 phi = (p - 1) * (q - 1)
 print(f"n = {n}")
 print(f"φ(n) = {phi}")
 
-# Choisir un exposant e valide
 possibles_e = [3, 5, 17, 257, 65537]
 e = None
 for candidate in possibles_e:
@@ -24,7 +21,6 @@ if e is None:
 else:
     print(f"Exposant public choisi automatiquement : e = {e}")
 
-# Fonction pour calculer l'inverse modulaire
 def inverse_modulaire(e, phi):
     r1, r2 = phi, e
     t1, t2 = 0, 1
@@ -39,10 +35,8 @@ def inverse_modulaire(e, phi):
     else:
         return t1 % phi
 
-# Calcul de d
 d = inverse_modulaire(e, phi)
 
-# Affichage des clés
 if d:
     print(f"La clé publique est : ({e},{n})")
     print(f"La clé privée est  : ({d},{n})")
