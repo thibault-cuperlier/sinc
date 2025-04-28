@@ -1,6 +1,8 @@
-pour utiliser se chifrement rsa fait miason cest tres simple 
-il sufit d'éxecuter le script aleatoir.py avec la commande 
+Pour utiliser ce chiffrement RSA fait maison, suivez ces étapes simples :
+
+1. Générez deux grands nombres premiers p et q en exécutant le script `aleatoir.py` :
 python aleatoir.py
-ensuite demaré chifrement.py avec 
+2. Ensuite, démarrez le script `chifrement.py` avec :
 python chifrement.py
-entre le nombre p generé par le premier script appuyer sur entre et faite la meme chose pour q ensuite demaré cryptage message 
+3. Entrez le nombre p généré par le premier script, appuyez sur Entrée, et faites la même chose pour q.
+4. Enfin, démarrez le cryptage du message.
