@@ -1,0 +1,6 @@
+pour utiliser se chifrement rsa fait miason cest tres simple 
+il sufit d'éxecuter le script aleatoir.py avec la commande 
+python aleatoir.py
+ensuite demaré chifrement.py avec 
+python chifrement.py
+entre le nombre p generé par le premier script appuyer sur entre et faite la meme chose pour q ensuite demaré cryptage message 
