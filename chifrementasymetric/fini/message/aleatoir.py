@@ -70,4 +70,5 @@ def generer_nombre_premier_chiffres(chiffres):
 
 # Exemple d'utilisation
 nombre_de_chiffres = 5  # Remplacez par le nombre de chiffres souhaité
-print(generer_nombre_premier_chiffres(nombre_de_chiffres))
+nombre_premier = generer_nombre_premier_chiffres(nombre_de_chiffres)
+print(f"Nombre premier avec {nombre_de_chiffres} chiffres : {nombre_premier}")
