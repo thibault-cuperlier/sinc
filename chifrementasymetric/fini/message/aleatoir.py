@@ -1,17 +1,15 @@
 import time
 
 def better_random_seed():
-    """Génère une graine aléatoire plus diversifiée."""
-    t = int(time.time() * 1000000)  # Temps actuel en microsecondes
-    t2 = int(time.perf_counter() * 1000000)  # Temps haute précision
-    t3 = int(time.process_time() * 1000000)  # Temps CPU
-    t4 = int((time.time_ns() // 1000) % 1000000)  # Temps en nanosecondes
-    t5 = int((time.time_ns() ^ t) % 1000000)  # Mélange supplémentaire
-    mix = (t ^ t2 ^ t3 ^ t4 ^ t5) * 6364136223846793005 + 1  # Mélange avec une constante
-    mix ^= (mix >> 21)  # Décalage et XOR pour plus de diversité
-    mix ^= (mix << 35) & 0xFFFFFFFFFFFFFFFF  # Décalage et masque
-    mix ^= (mix >> 4)
-    return abs(mix)  # Retourner une valeur positive
+    """Génère une graine aléatoire en concaténant des segments de 3 chiffres."""
+    t = int(time.time() * 1000) % 1000  # 3 derniers chiffres de l'heure actuelle en millisecondes
+    t2 = int(time.perf_counter() * 1000) % 1000  # 3 derniers chiffres du compteur haute précision
+    t3 = int(time.process_time() * 1000) % 1000  # 3 derniers chiffres du temps CPU
+    t4 = int((time.time_ns() // 1000) % 1000)  # 3 derniers chiffres du temps en nanosecondes
+    t5 = (t ^ t2 ^ t3 ^ t4) % 1000  # Mélange des 3 chiffres précédents
+    # Concaténation des segments pour former une graine
+    seed = int(f"{t:03}{t2:03}{t3:03}{t4:03}{t5:03}")
+    return seed
 
 def random_impair(min_val, max_val):
     """Génère un nombre impair aléatoire dans une plage donnée."""
