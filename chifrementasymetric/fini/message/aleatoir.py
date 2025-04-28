@@ -1,22 +1,8 @@
-import time
-
-def better_random_seed():
-    """Génère une graine aléatoire en concaténant plusieurs segments de 3 chiffres."""
-    segments = []
-    for _ in range(10):  # Générer 10 segments de 3 chiffres
-        t = int(time.time() * 1000) % 1000  # 3 derniers chiffres de l'heure actuelle en millisecondes
-        t2 = int(time.perf_counter() * 1000) % 1000  # 3 derniers chiffres du compteur haute précision
-        t3 = int(time.process_time() * 1000) % 1000  # 3 derniers chiffres du temps CPU
-        segment = (t ^ t2 ^ t3) % 1000  # Mélange des 3 chiffres
-        segments.append(f"{segment:03}")  # Ajouter le segment formaté à 3 chiffres
-        time.sleep(0.001)  # Pause pour éviter des valeurs identiques sur des exécutions rapprochées
-    seed = int("".join(segments))  # Concaténer tous les segments pour former la graine
-    return seed
+import random
 
 def random_impair(min_val, max_val):
     """Génère un nombre impair aléatoire dans une plage donnée."""
-    r = better_random_seed()
-    n = min_val + (r % (max_val - min_val + 1))
+    n = random.randint(min_val, max_val)
     if n % 2 == 0:
         n += 1
         if n > max_val:
@@ -50,7 +36,7 @@ def miller_rabin(n, k=5):
         r += 1
     
     for _ in range(k):
-        a = 2 + (better_random_seed() % (n - 3))
+        a = random.randint(2, n - 2)
         x = puissance_modulaire(a, d, n)
         if x == 1 or x == n - 1:
             continue
