@@ -1,6 +1,7 @@
 import os
 import tkinter as tk
 from tkinter import filedialog
+from tqdm import tqdm
 
 # Table de correspondance hexadécimal ↔ codes numériques
 table = {
@@ -17,10 +18,14 @@ def texte_vers_codes(texte):
 def chiffrement_rsa(m, e, n):
     return pow(m, e, n)
 
-# Fonction pour chiffrer un texte complet
+# Fonction pour chiffrer un texte complet avec barre de progression
 def chiffrer_texte(texte, e, n):
     codes = texte_vers_codes(texte)
-    return [chiffrement_rsa(code, e, n) for code in codes if code != -1]
+    texte_chiffre = []
+    for code in tqdm(codes, desc="Chiffrement en cours"):
+        if code != -1:
+            texte_chiffre.append(chiffrement_rsa(code, e, n))
+    return texte_chiffre
 
 # Fonction Tkinter pour choisir un fichier
 def choisir_fichier():
